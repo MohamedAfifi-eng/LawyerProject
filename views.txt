@@ -1,4 +1,0 @@
-<h1 class="text-center text-secondary font-monospace">@ViewData["Title"]</h1>
-
- class="btn btn-outline-info" 
-<table class="table table-striped table-hover table-bordered text-center">
