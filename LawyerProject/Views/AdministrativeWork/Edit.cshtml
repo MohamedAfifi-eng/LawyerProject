@@ -1,0 +1,65 @@
+﻿
+@model LawyerProject.Models.DB.AdministrativeWork
+
+@{
+    ViewData["Title"] = "تعديل العمل الإداري";
+}
+
+<h1 class="text-center text-secondary font-monospace">@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="FinishBefor" class="control-label"></label>
+                <input asp-for="FinishBefor" class="form-control" />
+                <span asp-validation-for="FinishBefor" class="text-danger"></span>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" asp-for="IsFinished" id="IsFinished">
+              <label class="form-check-label" asp-for="IsFinished">
+              </label>
+            </div>
+
+            <input type="hidden" asp-for="CaseID_FK" />
+
+
+            <input type="hidden" asp-for="AdministrativeWorkKindID_FK" />
+
+
+            <div class="form-group">
+                <input type="submit" value="حفظ" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-info"  asp-action="Index">الأعمال الإدارية</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

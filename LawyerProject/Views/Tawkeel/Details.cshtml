@@ -1,0 +1,53 @@
+﻿@model LawyerProject.Models.DB.Tawkeel
+
+@{
+    ViewData["Title"] = "تفاصيل التوكيل";
+}
+
+<h1 class="text-center text-secondary font-monospace">@ViewData["Title"]</h1>
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaktabTawseek.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaktabTawseek.Name)
+        </dd>
+    </dl>
+    @if (!string.IsNullOrEmpty( Model.TawkeelPath))
+    {
+        <p>
+            <a class="btn btn-outline-success" asp-controller="Tawkeel" asp-action="download" asp-route-id="@Model.Id"><img src="~/images/cloud-arrow-down.svg"> تحميل الملف</a>
+        </p>
+    }
+
+</div>
+<div>
+    <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@Model?.Id">تعديل</a> 
+    <a class="btn btn-outline-info" asp-action="Index">التوكيلات</a>
+</div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center text-secondary font-monospace">الموكلين</h3>
+                     @await Html.PartialAsync("Client/_ClientSearchPartial")
+                     @await Html.PartialAsync("TawkeelClients/_TawkeelClientsCreatePartial",new TawkeelClients{ TawkeelId_FK=Model.Id})
+                     @await Html.PartialAsync("Client/_ClientListPartial",Model.TawkeelClients.Select(x=>x.Client))
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,79 @@
+﻿@model LawyerProject.Models.DB.CaseEnemy
+@inject ICaseService _caseService
+@inject IEnemyService _enemyService
+@inject IGeneralService<CaseEnemy> _caseEnemy
+@{
+    if (Model.CaseId_FK==0)
+    {
+        IEnumerable<Case> cases;
+        if (Model.EnemyId_FK!=0)
+        {
+            cases = _caseService.GetCasesNotAssginedToEnemy(Model.EnemyId_FK);
+        }else
+        {
+            cases = _caseService.GetAll();
+        }
+        ViewBag.CaseId_FK = new SelectList(cases.Select(x => new { x.Id, x.Name }), "Id", "Name");
+    }
+    if (Model.EnemyId_FK==0)
+    {
+        IEnumerable<Enemy> enemis;
+        if (Model.CaseId_FK!=0)
+        {
+            enemis = _enemyService.EnemiesNotAssginedToCase(Model.CaseId_FK);
+        }else
+        {
+            enemis = _enemyService.GetAll();
+        }
+        ViewBag.EnemyId_FK = new SelectList(enemis.Select(x => new { x.Id, x.Name }), "Id", "Name");
+    }
+}
+
+@await Html.PartialAsync("Enemy/_EnemySearchPartial")
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="CaseEnemy" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @if (Model.CaseId_FK==0)
+                {
+                    <label asp-for="CaseId_FK" class="control-label"></label>
+                    <select asp-for="CaseId_FK" class="form-control" asp-items="ViewBag.CaseId_FK"></select>
+                }
+                else
+                {
+                    <input type="hidden" asp-for="CaseId_FK" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.EnemyId_FK==0)
+                {
+                    <label asp-for="EnemyId_FK" class="control-label"></label>
+                    <select asp-for="EnemyId_FK" class="form-control" asp-items="ViewBag.EnemyId_FK"></select>
+                }
+                else
+                {
+                    <input type="hidden" asp-for="EnemyId_FK" />
+                }
+            </div>
+            <input type="hidden" name="referer" value="@Context.Request.Path" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<script>
+    let EnemiesSelect = document.getElementById("EnemyId_FK");
+    UseEnemyFunction=()=>{
+        for(let i=0;i<Enemies.length;i++){
+            let opt=document.createElement("option");
+            opt.value = Enemies[i].Id;
+            opt.innerText = Enemies[i].Name;
+            EnemiesSelect.appendChild(opt);
+        }
+    }
+</script>
+

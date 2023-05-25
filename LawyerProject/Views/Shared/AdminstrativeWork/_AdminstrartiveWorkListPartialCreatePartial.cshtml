@@ -1,0 +1,75 @@
+﻿@model LawyerProject.Models.DB.AdministrativeWork
+@{
+    var CaseId = ViewData["CaseId"]??"";
+}
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AdminstrativeworkModal">
+    إضافة عمل إداري جديد
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="AdminstrativeworkModal" tabindex="-1" aria-labelledby="AdminstrativeworkModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="AdminstrativeworkModalLabel">إضافة عمل إداري</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Create" asp-controller="AdministrativeWork">
+                <div class="modal-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedBy" class="control-label"></label>
+                    <input asp-for="CreatedBy" class="form-control" />
+                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreateTime" class="control-label"></label>
+                    <input asp-for="CreateTime" class="form-control" />
+                    <span asp-validation-for="CreateTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpdateTime" class="control-label"></label>
+                    <input asp-for="UpdateTime" class="form-control" />
+                    <span asp-validation-for="UpdateTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FinishBefor" class="control-label"></label>
+                    <input asp-for="FinishBefor" class="form-control" />
+                    <span asp-validation-for="FinishBefor" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsFinished" /> @Html.DisplayNameFor(model => model.IsFinished)
+                    </label>
+                </div>
+                <div hidden class="form-group">
+                    <label asp-for="CaseID_FK" class="control-label"></label>
+                    <input type="hidden" asp-for="CaseID_FK" class ="form-control" >
+                        <input name="referer" type="hidden" value="@Context.Request.Path" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="AdministrativeWorkKindID_FK" class="control-label"></label>
+                    <select asp-for="AdministrativeWorkKindID_FK" class ="form-control" asp-items="ViewBag.AdministrativeWorkKindID_FK"></select>
+                </div>
+                    <div class="modal-footer">
+                        <span type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</span>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+</div>
+        </form>
+    </div>
+</div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

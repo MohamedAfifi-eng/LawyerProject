@@ -1,0 +1,72 @@
+﻿@model LawyerProject.Models.DB.TawkeelClients
+@inject IClientService _clientService
+@inject ITawkeelService _tawkeelService
+
+@{
+    dynamic clients,tawkeels;
+    if (Model.ClientId_FK==0&&Model.TawkeelId_FK!=0)
+    {
+        clients = _clientService.GetClientsNotAssignedtoTawkeel(Model.TawkeelId_FK);
+
+        }else
+        {
+            clients = _clientService.GetAll().Select(x => new { x.Id, x.Name });
+
+        }
+        if (Model.TawkeelId_FK==0&&Model.ClientId_FK!=0)
+        {
+            tawkeels = new List<Client>();
+        }else
+        {
+            tawkeels = _tawkeelService.GetAll().Select(x => new { x.Id, x.Name });
+        }
+        ViewBag.ClientId_FK = new SelectList(clients, "Id", "Name");
+        ViewBag.TawkeelId_FK = new SelectList(tawkeels, "Id", "Name");
+    }
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="TawkeelClients" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.ClientId_FK == 0)
+            {
+                <div class="form-group">
+                    <label asp-for="ClientId_FK" class="control-label"></label>
+                    <select asp-for="ClientId_FK" class ="form-control" asp-items="ViewBag.ClientId_FK"></select>
+                </div>
+            }else
+            {
+                <input type="hidden" asp-for="ClientId_FK">
+            }
+            @if (Model.TawkeelId_FK==0)
+            {
+                <div class="form-group">
+                    <label asp-for="TawkeelId_FK" class="control-label"></label>
+                    <select asp-for="TawkeelId_FK" class="form-control" asp-items="ViewBag.TawkeelId_FK"></select>
+                </div>
+            }else
+            {
+                <input type="hidden" asp-for="TawkeelId_FK">
+            }
+            <input type="hidden" name="referer" value="@Context.Request.Path" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    let ClientId_FK = document.getElementById("ClientId_FK");
+     UseClientsFunction=()=>{
+        ClientId_FK.innerText="";
+        for(i=0;i<Clients.length;i++){
+            let opt=document.createElement("option");
+            opt.value = Clients[i].Id;
+            opt.innerText = Clients[i].Name;
+            ClientId_FK.appendChild(opt);
+            console.log(opt);
+        }
+    }
+</script>
+

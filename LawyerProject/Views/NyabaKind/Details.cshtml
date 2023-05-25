@@ -1,0 +1,31 @@
+﻿@model LawyerProject.Models.DB.NyabaKind
+
+@{
+    ViewData["Title"] = "تفاصيل نوع نيابة";
+}
+
+<h1 class="text-center text-secondary font-monospace">@ViewData["Title"]</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@Model?.Id">تعديل</a> 
+    <a class="btn btn-outline-info" asp-action="Index">أنواع النيابات</a>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center text-secondary font-monospace">النيابات</h3>
+            @await Html.PartialAsync("Nyaba/_NyabaIndexPartial",Model.Nyabas)
+        </div>
+    </div>
+</div>

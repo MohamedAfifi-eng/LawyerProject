@@ -1,0 +1,106 @@
+
+@model IEnumerable<LawyerProject.Models.DB.Case>
+
+@{
+    ViewData["Title"] = "القضايا";
+}
+<h1 class="text-center text-secondary font-monospace">@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">إضافة قضية جديدة</a>
+</p>
+<table class="text-center table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdatedOn)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.CreateOn)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.CaseSubKind.Name)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Dayra.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Dayra.Nyaba.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dayra.Nyaba.Court.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedOn)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateOn)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseSubKind.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Dayra.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Dayra.Nyaba.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dayra.Nyaba.Court.Name)
+            </td>
+            <td>
+                <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.Id">تعديل</a> 
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">تفاصيل</a> 
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

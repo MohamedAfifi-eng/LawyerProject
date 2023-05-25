@@ -1,0 +1,17 @@
+﻿@inject IConfiguration _config
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="background">
+        
+    </div>
+    <h1 class="display-4">مكتب الاستاذ</h1>
+    <h1 class="display-4">@(_config.GetSection("OfficeInfo:OfficeName").Value)</h1>
+    <h1 class="display-4">المحامي</h1>
+</div>
+<p class="text-center my-5"> <a class="btn btn-info" asp-controller="AdministrativeWork" asp-action="Tasks">الأعمال الإدارية العاجلة</a> </p>
+@section Css{
+    <link rel="stylesheet" href="~/css/Home.css" />
+}

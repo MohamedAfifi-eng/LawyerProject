@@ -1,0 +1,31 @@
+﻿@model LawyerProject.Models.DB.CourtKind
+
+@{
+    ViewData["Title"] = "تفاصيل نوع المحكمة";
+}
+
+
+<div>
+    <h4>CourtKind</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@Model?.Id">تعديل</a> 
+    <a class="btn btn-outline-info" asp-action="Index">أنواع المحاكم</a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @await Html.PartialAsync("Court/_CourtListPartial",Model.Courts)
+        </div>
+    </div>
+</div>

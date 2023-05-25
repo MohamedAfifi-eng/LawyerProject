@@ -1,0 +1,65 @@
+﻿@model LawyerProject.Models.DB.Dayra
+
+@{
+    ViewData["Title"] = "تعديل الدائرة";
+}
+
+<h1 class="text-center text-secondary font-monospace">@ViewData["Title"]</h1>
+
+<h4>@Model.Name</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NyabaId_FK" class="control-label"></label>
+                <select asp-for="NyabaId_FK" class="form-control" asp-items="ViewBag.NyabaId_FK"></select>
+                <span asp-validation-for="NyabaId_FK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NameOfSecertary" class="control-label"></label>
+                <input asp-for="NameOfSecertary" class="form-control" />
+                <span asp-validation-for="NameOfSecertary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressOfSecertary" class="control-label"></label>
+                <input asp-for="AddressOfSecertary" class="form-control" />
+                <span asp-validation-for="AddressOfSecertary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressOfJudgment" class="control-label"></label>
+                <input asp-for="AddressOfJudgment" class="form-control" />
+                <span asp-validation-for="AddressOfJudgment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressOfGadwal" class="control-label"></label>
+                <input asp-for="AddressOfGadwal" class="form-control" />
+                <span asp-validation-for="AddressOfGadwal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="حفظ" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-outline-info" asp-action="Index">الدوائر</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

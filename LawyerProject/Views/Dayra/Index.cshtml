@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LawyerProject.Models.DB.Dayra>
+
+@{
+    ViewData["Title"] = "الدوائر";
+}
+
+<h1 class="text-center text-secondary font-monospace">@ViewData["Title"]</h1>
+<p>
+    <a class="btn btn-primary" asp-action="Create">إضافة دائرة</a>
+</p>
+<table class="table table-hover table-striped table-bordered text-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nyaba.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameOfSecertary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressOfSecertary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressOfJudgment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressOfGadwal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nyaba.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOfSecertary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressOfSecertary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressOfJudgment)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressOfGadwal)
+                </td>
+            <td>
+                    <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.ID">تعديل</a> 
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.ID">تفاصيل</a> 
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.ID">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

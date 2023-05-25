@@ -1,0 +1,54 @@
+﻿@model LawyerProject.Models.DB.Dayra
+
+<div>
+    <h4>بيانات الدائرة</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.AddressOfSecertary)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.AddressOfSecertary)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.NameOfSecertary)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.NameOfSecertary)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.AddressOfJudgment)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.AddressOfJudgment)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.AddressOfGadwal)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.AddressOfGadwal)
+        </dd>
+        <dt class = "col-sm-6">
+            @Html.DisplayNameFor(model => model.Nyaba.Name)
+        </dt>
+        <dd class = "col-sm-6">
+            @Html.DisplayFor(model => model.Nyaba.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-info" asp-controller="Dyra" asp-action="Edit" asp-route-id="@Model?.ID">نعديل</a> 
+    <a class="btn btn-outline-info" asp-controller="Dyra" asp-action="Index">الدوائر</a>
+</div>

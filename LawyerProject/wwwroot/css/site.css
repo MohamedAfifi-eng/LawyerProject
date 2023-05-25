@@ -1,0 +1,43 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.nav-item a{
+    color:black !important;
+    transition:all ease-in-out .3s;
+}
+.nav-item> a:hover{
+    background-color:#eee;
+}
+a.nav-item {
+    color: black !important;
+    transition: all ease-in-out .3s;
+}
+
+a.nav-item:hover {
+    background-color: #eee;
+}
+.my-link {
+    transition: all ease-in-out .3s;
+    padding:.6rem 1rem;
+}
+.my-link:hover {
+    background-color: #eee;
+}
+a.btn-outline-danger {
+    pointer-events: none;
+}

@@ -1,0 +1,40 @@
+﻿
+
+<div class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-12">
+        <label class="visually-hidden" for="EnemySearchSelect">طريقة البحث</label>
+        <select class="form-select" id="EnemySearchSelect">
+            <option value="0"> المعرف</option>
+            <option value="1">إسم الخصم</option>
+            <option value="2">رقم قومي</option>
+            <option value="3">جنسية</option>
+            <option value="4">عنوان</option>
+            <option value="5">رقم تليفون</option>
+            <option value="6">بيانات محامي الخصم</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <label class="visually-hidden" for="EnemySearchInput">Name</label>
+        <input type="text" class="form-control" id="EnemySearchInput" placeholder="بحث">
+    </div>
+    <div class="col-12">
+        <button type="submit" onclick="EnemySearch()" class="btn btn-primary">بحث</button>
+    </div>
+</div>
+<hr />
+<script>
+    let EnemySearchSelect = document.getElementById("EnemySearchSelect");
+    let EnemySearchInput = document.getElementById("EnemySearchInput");
+    let Enemies = [];
+    var UseEnemyFunction = null;
+    let EnemySearch = () => {
+        fetch(`/Enemy/Search?SearchOption=${EnemySearchSelect.value}&Searchfor=${EnemySearchInput.value}`)
+            .then(response => response.json())
+            .then(data => Enemies = data)
+            .then(() => { 
+                if (UseEnemyFunction != null)
+                { UseEnemyFunction() }
+            });
+    }
+
+</script>

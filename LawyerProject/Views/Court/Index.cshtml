@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LawyerProject.Models.DB.Court>
+
+@{
+    ViewData["Title"] = "المحاكم";
+}
+
+<h1 class="text-center font-monospace text-secondary">@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">إضافة محكمة جديدة</a>
+</p>
+<table class="table table-hover table-striped table-bordered text-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourtKind.Name)
+            </th>
+            <th>التحكم</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                    @(item.Discription ?? "-")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourtKind.Name)
+            </td>
+            <td>
+                <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.ID">تعديل</a> 
+                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.ID">تفاصيل</a> 
+                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.ID">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

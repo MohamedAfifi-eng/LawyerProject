@@ -1,0 +1,72 @@
+﻿@using LawyerProject.Models.VM;
+@inject IClientService _clientService
+@inject ICaseService _caseService
+@model LawyerProject.Models.DB.CaseClient
+@{
+    if (Model.ClientId_FK==0)
+    {
+        if (Model.CaseId_FK!=0)
+        {
+            ViewBag.ClientId_FK = new SelectList(_clientService.GetClientsNotAssignedtoCase(Model.CaseId_FK).Select(x => new { x.Id, x.Name }), "Id", "Name");
+        }else
+        {
+            ViewBag.ClientId_FK = new SelectList(_clientService.GetAll().Select(x => new { x.Id, x.Name }), "Id", "Name");
+        }
+    }
+    if (Model.CaseId_FK==0)
+    {
+
+        ViewBag.ClientId_FK = new SelectList(_caseService.GetAll().Select(x => new { x.Id, x.Name }), "Id", "Name");
+    }
+
+}
+<h4>الموكلين</h4>
+@await Html.PartialAsync("Client/_ClientSearchPartial")
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="CaseClients" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @if (Model.CaseId_FK == 0)
+                {
+                    <label asp-for="CaseId_FK" class="control-label"></label>
+                    <select asp-for="CaseId_FK" class="form-control" asp-items="ViewBag.CaseId_FK"></select>
+
+                }else
+                {
+                    <input type="hidden" asp-for="CaseId_FK" />
+                }
+            </div>
+            <div class="form-group">
+                @if (Model.ClientId_FK==0)
+                {
+                    <label asp-for="ClientId_FK" class="control-label"></label>
+                    <select asp-for="ClientId_FK" class="form-control" asp-items="ViewBag.ClientId_FK"></select>
+                }else
+                {
+                    <input type="hidden" asp-for="ClientId_FK" />
+                }
+            </div>
+            <input type="hidden" name="referer" value="@Context.Request.Path" />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    let ClientId_FK = document.getElementById("ClientId_FK");
+   var UseClientsFunction=()=>{
+        ClientId_FK.innerHTML="";
+        for (var i = 0; i < Clients.length; i++) {
+            let optionofselect=document.createElement("option");
+            optionofselect.value = Clients[i].Id;
+            optionofselect.innerText = Clients[i].Name;
+            ClientId_FK.appendChild(optionofselect);
+        }
+    }
+</script>
+
+
